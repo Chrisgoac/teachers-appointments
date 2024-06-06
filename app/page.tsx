@@ -46,9 +46,12 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6">Login</h1>
+        <h1 className="text-2xl text-gray-800 font-bold mb-6">Login</h1>
         {error && <p className="text-red-500">{error}</p>}
         <form onSubmit={handleLogin}>
+          <p className="text-gray-800 mb-4">
+            Please enter your email and password to access your teacher dashboard.
+          </p>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <input
