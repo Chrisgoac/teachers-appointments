@@ -47,7 +47,7 @@ export default function Appointments() {
             <p>
               {new Date(appointment.startDate).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}{' '} 
               to{' '}
-              {new Date(appointment.endDate).toLocaleString('de-ES', { timeZone: 'Europe/Madrid' })}
+              {new Date(appointment.endDate).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}
             </p>
               <p className="text-gray-600">Description: {appointment.description}</p>
               <p className="text-gray-600">Student: {appointment.student.name}</p>
