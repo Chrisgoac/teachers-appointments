@@ -54,10 +54,10 @@ export default function EditAppointment() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-500 to-green-600 text-white">
-      <h1 className="text-4xl font-bold mb-8">Editar Appointment</h1>
+      <h1 className="text-4xl font-bold mb-8">Edit appointment</h1>
       <form onSubmit={handleSubmit} className="bg-white text-black rounded-lg p-8 shadow-lg w-full max-w-md">
         <label className="block mb-4">
-          <span className="text-gray-700">Fecha de Inicio del Appointment</span>
+          <span className="text-gray-700">Appointment start date</span>
           <input
             type="datetime-local"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -66,7 +66,7 @@ export default function EditAppointment() {
           />
         </label>
         <label className="block mb-4">
-          <span className="text-gray-700">Fecha de Fin del Appointment</span>
+          <span className="text-gray-700">Appointment end date</span>
           <input
             type="datetime-local"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -75,7 +75,7 @@ export default function EditAppointment() {
           />
         </label>
         <label className="block mb-4">
-          <span className="text-gray-700">Descripción del Appointment</span>
+          <span className="text-gray-700">Appointment description</span>
           <input
             type="text"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -84,13 +84,13 @@ export default function EditAppointment() {
           />
         </label>
         <label className="block mb-4">
-          <span className="text-gray-700">Estudiante</span>
+          <span className="text-gray-700">Student</span>
           <select
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             value={studentId ?? ''}
             onChange={(e) => setStudentId(Number(e.target.value))}
           >
-            <option value="" disabled>Seleccione un estudiante</option>
+            <option value="" disabled>Select a student</option>
             {students.map(student => (
               <option key={student.id} value={student.id}>{student.name}</option>
             ))}
@@ -100,7 +100,7 @@ export default function EditAppointment() {
           type="submit"
           className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105"
         >
-          Guardar
+          Save
         </button>
         <NavigationButton path="/appointments">Cancel</NavigationButton>
       </form>

@@ -44,7 +44,11 @@ export default function Appointments() {
         {appointments.map(appointment => (
           <li key={appointment.id} className="border-b border-gray-300 py-2 flex justify-between items-center">
             <div>
-              <p>{new Date(appointment.startDate).toLocaleString()} to {new Date(appointment.endDate).toLocaleString()}</p> 
+            <p>
+              {new Date(appointment.startDate).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}{' '} 
+              to{' '}
+              {new Date(appointment.endDate).toLocaleString('de-ES', { timeZone: 'Europe/Madrid' })}
+            </p>
               <p className="text-gray-600">Description: {appointment.description}</p>
               <p className="text-gray-600">Student: {appointment.student.name}</p>
             </div>
