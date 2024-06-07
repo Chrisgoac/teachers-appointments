@@ -130,7 +130,10 @@ export default function Appointments() {
           </li>
         ))}
       </ul>
-      <NavigationButton path="/dashboard">Return to dashboard</NavigationButton> 
+      <div className='flex justify-between items-center gap-4'>
+        <NavigationButton path="/appointments/new">Create new appointment</NavigationButton>
+        <NavigationButton path="/dashboard">Return to dashboard</NavigationButton> 
+      </div>
     </div>
   );
 }

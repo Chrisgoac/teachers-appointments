@@ -34,6 +34,12 @@ export default function Home() {
           My students
         </button>
         <button 
+          onClick={() => router.push('/appointments')}
+          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105"
+        >
+          My appointments
+        </button>
+        <button 
           onClick={() => router.push('/students/add')}
           className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105"
         >
@@ -44,12 +50,6 @@ export default function Home() {
           className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105"
         >
           Create new appointment
-        </button>
-        <button 
-          onClick={() => router.push('/appointments')}
-          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105"
-        >
-          My appointments
         </button>
       </div>
     </div>
