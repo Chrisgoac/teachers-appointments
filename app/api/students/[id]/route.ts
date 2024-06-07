@@ -32,14 +32,15 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
     const { id } = params;
-    const { name, email } = await req.json();
+    const { name, email, description } = await req.json();
   
     try {
       const updatedStudent = await prisma.student.update({
         where: { id: Number(id) },
         data: {
           name,
-          email
+          email,
+          description
         },
       });
       return NextResponse.json({ appointment: updatedStudent }, { status: 200 });

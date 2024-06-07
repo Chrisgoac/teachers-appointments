@@ -52,7 +52,6 @@ export default function Home() {
         >
           My appointments
         </button>
-        <FileUpload/>
       </div>
     </div>
   );

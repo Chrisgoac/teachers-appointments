@@ -12,13 +12,14 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-    const { name, email } = await req.json();
+    const { name, email, description } = await req.json();
 
     try {
       const newStudent = await prisma.student.create({
         data: {
           name,
           email,
+          description
         },
       });
       return NextResponse.json({ student: newStudent }, { status: 201 });

@@ -45,6 +45,7 @@ export default function Students() {
             <div>
               <p>{student.name}</p>
               <p className="text-gray-600">{student.email}</p>
+              <p className="text-gray-600">Description: {student.description}</p>
             </div>
             <div>
               <button

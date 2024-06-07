@@ -8,6 +8,7 @@ import NavigationButton from '../../../../lib/components/NavigationButton';
 export default function EditStudent() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [description, setDescription] = useState('');
   const router = useRouter();
   const { id } = useParams();
 
@@ -17,6 +18,7 @@ export default function EditStudent() {
       .then((data: { student: Student }) => {
         setName(data.student.name);
         setEmail(data.student.email);
+        setDescription(data.student.description);
       });
   }, [id]);
 
@@ -28,7 +30,7 @@ export default function EditStudent() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, email }),
+      body: JSON.stringify({ name, email, description }),
     });
 
     if (res.ok) {
@@ -56,6 +58,14 @@ export default function EditStudent() {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label className="block mb-4">
+          <span className="text-gray-700">Student description</span>
+          <textarea
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </label>
         <button
