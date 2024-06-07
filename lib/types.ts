@@ -14,9 +14,11 @@ export interface Student {
   
 export interface Appointment {
     id: number;
+    completed: boolean;
     studentId: number;
     startDate: Date;
     endDate: Date;
+    type: string;
     description: string;
     student: Student;
 }

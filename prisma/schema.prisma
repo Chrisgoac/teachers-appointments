@@ -46,9 +46,11 @@ model Permission {
 
 model Appointment {
   id          Int      @id @default(autoincrement())
+  completed   Boolean  @default(false)
   studentId   Int
   startDate   DateTime
   endDate     DateTime
+  type        String   @default("online")
   description String
   student     Student  @relation(fields: [studentId], references: [id])
 }

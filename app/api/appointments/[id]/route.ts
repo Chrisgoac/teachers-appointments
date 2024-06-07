@@ -36,7 +36,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
   const { id } = params;
-  const { studentId, startDate, endDate, description } = await req.json();
+  const { studentId, startDate, endDate, description, type } = await req.json();
 
   try {
     const updatedAppointment = await prisma.appointment.update({
@@ -45,6 +45,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         studentId,
         startDate: new Date(startDate),
         endDate: new Date(endDate),
+        type,
         description,
       },
     });

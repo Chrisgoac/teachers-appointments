@@ -11,6 +11,7 @@ export default function EditAppointment() {
   const [description, setDescription] = useState('');
   const [studentId, setStudentId] = useState<number | null>(null);
   const [students, setStudents] = useState<{ id: number, name: string }[]>([]);
+  const [appointmentType, setAppointmentType] = useState('');
   const router = useRouter();
   const { id } = useParams();
 
@@ -41,6 +42,7 @@ export default function EditAppointment() {
 
               setDescription(data.appointment.description);
               setStudentId(data.appointment.studentId);
+              setAppointmentType(data.appointment.type);
             });
           fetch('/api/students')
             .then((res) => res.json())
@@ -59,7 +61,7 @@ export default function EditAppointment() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ startDate: startDateTime, endDate: endDateTime, description, studentId }),
+      body: JSON.stringify({ startDate: startDateTime, endDate: endDateTime, description, studentId, type: appointmentType }),
     });
 
     if (res.ok) {
@@ -99,6 +101,17 @@ export default function EditAppointment() {
           />
         </label>
         <label className="block mb-4">
+          <span className="text-gray-700">Appointment Type</span>
+          <select
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            value={appointmentType}
+            onChange={(e) => setAppointmentType(e.target.value)}
+          >
+            <option value="online">Online</option>
+            <option value="in person">In Person</option>
+          </select>
+        </label>
+        <label className="block mb-4">
           <span className="text-gray-700">Appointment description</span>
           <input
             type="text"
@@ -110,7 +123,7 @@ export default function EditAppointment() {
         <label className="block mb-4">
           <span className="text-gray-700">Student</span>
           <select
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             value={studentId ?? ''}
             onChange={(e) => setStudentId(Number(e.target.value))}
           >

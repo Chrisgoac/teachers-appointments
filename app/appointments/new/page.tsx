@@ -11,6 +11,7 @@ export default function NewAppointment() {
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [description, setDescription] = useState('');
+  const [appointmentType, setAppointmentType] = useState('online');
   const router = useRouter();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function NewAppointment() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ studentId: selectedStudentId, startDate: startDateTime, endDate: endDateTime, description }),
+      body: JSON.stringify({ studentId: selectedStudentId, startDate: startDateTime, endDate: endDateTime, description, type: appointmentType }),
     });
 
     if (res.ok) {
@@ -50,7 +51,7 @@ export default function NewAppointment() {
         <label className="block mb-4">
           <span className="text-gray-700">Student</span>
           <select
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             value={selectedStudentId || ''}
             onChange={(e) => setSelectedStudentId(Number(e.target.value))}
           >
@@ -88,6 +89,17 @@ export default function NewAppointment() {
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
           />
+        </label>
+        <label className="block mb-4">
+          <span className="text-gray-700">Appointment Type</span>
+          <select
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            value={appointmentType}
+            onChange={(e) => setAppointmentType(e.target.value)}
+          >
+            <option value="online">Online</option>
+            <option value="in person">In Person</option>
+          </select>
         </label>
         <label className="block mb-4">
           <span className="text-gray-700">Appointment description</span>

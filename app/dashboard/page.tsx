@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { User, AuthResponse } from '../../lib/types';
-import FileUpload from '@/lib/components/FileUpload';
 
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);

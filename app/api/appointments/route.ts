@@ -15,7 +15,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { studentId, startDate, endDate, description } = await req.json();
+  const { studentId, startDate, endDate, description, type } = await req.json();
 
   try {
     const newAppointment = await prisma.appointment.create({
@@ -24,6 +24,7 @@ export async function POST(req: Request) {
         startDate: new Date(startDate),
         endDate: new Date(endDate),
         description,
+        type
       },
     });
     return NextResponse.json({ appointment: newAppointment }, { status: 201 });
