@@ -30,7 +30,7 @@ export default function Files() {
     }
 
     const handleDownload = async (filename: string) => {
-        const response = await fetch('/api/files/download?file=' + filename)
+        const response = await fetch('/api/files/' + filename + '/download')
         const blob = await response.blob()
         const fileURL = window.URL.createObjectURL(blob)
         let anchor = document.createElement('a')

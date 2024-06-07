@@ -1,21 +1,19 @@
 import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { r2 } from '@/lib/r2'
 
-export async function GET(request: Request) {
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+	const { id } = params;
 	try {
 		console.log(`Retrieving pdf from R2!`)
 
-		const url = new URL(request.url);
-		const fileName = url.searchParams.get('file');
-
-        if (!fileName) {
+        if (!id) {
             throw new Error('No filename provided.');
         }
 
 		const pdf = await r2.send(
 			new GetObjectCommand({
 				Bucket: process.env.R2_BUCKET_NAME,
-				Key: fileName,
+				Key: id,
 			})
 		)
 
