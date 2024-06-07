@@ -52,6 +52,12 @@ export default function Home() {
           Create new appointment
         </button>
       </div>
+      <button 
+        onClick={() => router.push('/files')}
+        className="mt-3 bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105"
+      >
+        My files
+      </button>
     </div>
   );
 }

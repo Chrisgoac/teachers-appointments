@@ -12,6 +12,11 @@ export interface Student {
     appointments: Appointment[];
 }
   
+export interface DbFile {
+    id: number;
+    name: string;
+}
+
 export interface Appointment {
     id: number;
     completed: boolean;

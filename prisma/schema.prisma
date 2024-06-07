@@ -32,7 +32,7 @@ model Student {
 model File {
   id          Int          @id @default(autoincrement())
   name        String
-  path        String
+  url         String
   permissions Permission[]
 }
 
