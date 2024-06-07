@@ -64,7 +64,10 @@ export default function Students() {
           </li>
         ))}
       </ul>
-      <NavigationButton path="/dashboard">Return to dashboard</NavigationButton>
+      <div className='flex justify-between items-center gap-4'>
+        <NavigationButton path="/students/add">Add new student</NavigationButton>
+        <NavigationButton path="/dashboard">Return to dashboard</NavigationButton> 
+      </div>
     </div>
   );
 }
