@@ -14,24 +14,40 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
+  id       Int    @id @default(autoincrement())
+  email    String @unique
   password String
-  name  String
+  name     String
 }
 
 model Student {
-  id       Int      @id @default(autoincrement())
-  name   String
-  email    String   @unique
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
   appointments Appointment[]
+  Permission   Permission[]
+}
+
+model File {
+  id          Int          @id @default(autoincrement())
+  name        String
+  path        String
+  permissions Permission[]
+}
+
+model Permission {
+  id        Int     @id @default(autoincrement())
+  fileId    Int
+  studentId Int
+  file      File    @relation(fields: [fileId], references: [id])
+  student   Student @relation(fields: [studentId], references: [id])
 }
 
 model Appointment {
-  id        Int      @id @default(autoincrement())
-  studentId Int
-  startDate DateTime
-  endDate   DateTime
+  id          Int      @id @default(autoincrement())
+  studentId   Int
+  startDate   DateTime
+  endDate     DateTime
   description String
-  student   Student   @relation(fields: [studentId], references: [id])
+  student     Student  @relation(fields: [studentId], references: [id])
 }

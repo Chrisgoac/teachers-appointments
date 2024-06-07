@@ -24,8 +24,17 @@ export default function EditAppointment() {
           fetch(`/api/appointments/${id}`)
             .then((res) => res.json())
             .then((data: { appointment: Appointment }) => {
-              setStartDate(new Date(data.appointment.startDate).toISOString().substring(0, 16));
-              setEndDate(new Date(data.appointment.endDate).toISOString().substring(0, 16));
+              // Adjust the time for Europe Central Time (CET)
+              const startDateTime = new Date(data.appointment.startDate);
+              const endDateTime = new Date(data.appointment.endDate);
+
+              // Get the offset in minutes and adjust the time
+              const offsetInMinutes = startDateTime.getTimezoneOffset();
+              startDateTime.setMinutes(startDateTime.getMinutes() - offsetInMinutes);
+              endDateTime.setMinutes(endDateTime.getMinutes() - offsetInMinutes);
+
+              setStartDate(startDateTime.toISOString().substring(0, 16));
+              setEndDate(endDateTime.toISOString().substring(0, 16));
               setDescription(data.appointment.description);
               setStudentId(data.appointment.studentId);
             });

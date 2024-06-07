@@ -15,19 +15,20 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-    const { studentId, startDate, endDate, description } = await req.json();
-  
-    try {
-      const newAppointment = await prisma.appointment.create({
-        data: {
-          studentId,
-          startDate: new Date(startDate),
-          endDate: new Date(endDate),
-          description,
-        },
-      });
-      return NextResponse.json({ appointment: newAppointment }, { status: 201 });
-    } catch (error) {
-      return NextResponse.json({ error: 'Failed to create appointment' }, { status: 500 });
-    }
+  const { studentId, startDate, endDate, description } = await req.json();
+
+  try {
+    const newAppointment = await prisma.appointment.create({
+      data: {
+        studentId,
+        startDate: new Date(startDate),
+        endDate: new Date(endDate),
+        description,
+      },
+    });
+    return NextResponse.json({ appointment: newAppointment }, { status: 201 });
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to create appointment' }, { status: 500 });
+  }
 }
+
