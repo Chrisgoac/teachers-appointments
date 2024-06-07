@@ -1,10 +1,11 @@
 'use client'
 import NavigationButton from '@/lib/components/NavigationButton'
 import { AuthResponse, DbFile } from '@/lib/types'
-import router from 'next/router'
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 export default function Files() {
+    const router = useRouter();
     const [file, setFile] = useState<File>()
     const [files, setFiles] = useState<DbFile[]>([])
 
