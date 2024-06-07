@@ -93,9 +93,9 @@ export default function Appointments() {
                 -{' '}
                 {new Date(appointment.endDate).toLocaleTimeString('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' })}
               </p>
-              <p className="text-gray-600">Description: {appointment.description}</p>
-              <p className="text-gray-600">Type: {appointment.type}</p>
               <p className="text-gray-600">Student: {appointment.student.name}</p>
+              <p className="text-gray-600">Type: {appointment.type}</p>
+              <p className="text-gray-600">Description: {appointment.description}</p>
             </div>
             <div>
               {!appointment.completed && (
