@@ -1,4 +1,3 @@
-// /pages/appointments/edit/[id].tsx
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
@@ -6,8 +5,9 @@ import { Appointment, AuthResponse } from '../../../../lib/types';
 import NavigationButton from '@/lib/components/NavigationButton';
 
 export default function EditAppointment() {
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [date, setDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [description, setDescription] = useState('');
   const [studentId, setStudentId] = useState<number | null>(null);
   const [students, setStudents] = useState<{ id: number, name: string }[]>([]);
@@ -24,7 +24,6 @@ export default function EditAppointment() {
           fetch(`/api/appointments/${id}`)
             .then((res) => res.json())
             .then((data: { appointment: Appointment }) => {
-              // Adjust the time for Europe Central Time (CET)
               const startDateTime = new Date(data.appointment.startDate);
               const endDateTime = new Date(data.appointment.endDate);
 
@@ -33,8 +32,13 @@ export default function EditAppointment() {
               startDateTime.setMinutes(startDateTime.getMinutes() - offsetInMinutes);
               endDateTime.setMinutes(endDateTime.getMinutes() - offsetInMinutes);
 
-              setStartDate(startDateTime.toISOString().substring(0, 16));
-              setEndDate(endDateTime.toISOString().substring(0, 16));
+              // Get the date in YYYY-MM-DD format
+              setDate(startDateTime.toISOString().substring(0, 10));
+
+              // Get the time in HH:MM format
+              setStartTime(startDateTime.toISOString().substring(11, 16));
+              setEndTime(endDateTime.toISOString().substring(11, 16));
+
               setDescription(data.appointment.description);
               setStudentId(data.appointment.studentId);
             });
@@ -47,13 +51,15 @@ export default function EditAppointment() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const startDateTime = `${date}T${startTime}:00`;
+    const endDateTime = `${date}T${endTime}:00`;
 
     const res = await fetch(`/api/appointments/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ startDate, endDate, description, studentId }),
+      body: JSON.stringify({ startDate: startDateTime, endDate: endDateTime, description, studentId }),
     });
 
     if (res.ok) {
@@ -66,21 +72,30 @@ export default function EditAppointment() {
       <h1 className="text-4xl font-bold mb-8">Edit appointment</h1>
       <form onSubmit={handleSubmit} className="bg-white text-black rounded-lg p-8 shadow-lg w-full max-w-md">
         <label className="block mb-4">
-          <span className="text-gray-700">Appointment start date</span>
+          <span className="text-gray-700">Appointment date</span>
           <input
-            type="datetime-local"
+            type="date"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
           />
         </label>
         <label className="block mb-4">
-          <span className="text-gray-700">Appointment end date</span>
+          <span className="text-gray-700">Appointment start time</span>
           <input
-            type="datetime-local"
+            type="time"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+          />
+        </label>
+        <label className="block mb-4">
+          <span className="text-gray-700">Appointment end time</span>
+          <input
+            type="time"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            value={endTime}
+            onChange={(e) => setEndTime(e.target.value)}
           />
         </label>
         <label className="block mb-4">
@@ -116,3 +131,4 @@ export default function EditAppointment() {
     </div>
   );
 }
+

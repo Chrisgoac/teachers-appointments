@@ -7,8 +7,9 @@ import NavigationButton from '@/lib/components/NavigationButton';
 export default function NewAppointment() {
   const [students, setStudents] = useState<Student[]>([]);
   const [selectedStudentId, setSelectedStudentId] = useState<number | null>(null);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [date, setDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [description, setDescription] = useState('');
   const router = useRouter();
 
@@ -26,12 +27,15 @@ export default function NewAppointment() {
       return;
     }
 
+    const startDateTime = `${date}T${startTime}:00`;
+    const endDateTime = `${date}T${endTime}:00`;
+
     const res = await fetch('/api/appointments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ studentId: selectedStudentId, startDate, endDate, description }),
+      body: JSON.stringify({ studentId: selectedStudentId, startDate: startDateTime, endDate: endDateTime, description }),
     });
 
     if (res.ok) {
@@ -59,21 +63,30 @@ export default function NewAppointment() {
           </select>
         </label>
         <label className="block mb-4">
-          <span className="text-gray-700">Appointment start date</span>
+          <span className="text-gray-700">Appointment date</span>
           <input
-            type="datetime-local"
+            type="date"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
           />
         </label>
         <label className="block mb-4">
-          <span className="text-gray-700">Appointment end date</span>
+          <span className="text-gray-700">Appointment start time</span>
           <input
-            type="datetime-local"
+            type="time"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
+          />
+        </label>
+        <label className="block mb-4">
+          <span className="text-gray-700">Appointment end time</span>
+          <input
+            type="time"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            value={endTime}
+            onChange={(e) => setEndTime(e.target.value)}
           />
         </label>
         <label className="block mb-4">

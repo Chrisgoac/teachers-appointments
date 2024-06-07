@@ -1,4 +1,3 @@
-// /pages/appointments/index.tsx
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -44,11 +43,12 @@ export default function Appointments() {
         {appointments.map(appointment => (
           <li key={appointment.id} className="border-b border-gray-300 py-2 flex justify-between items-center">
             <div>
-            <p>
-              {new Date(appointment.startDate).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}{' '} 
-              to{' '}
-              {new Date(appointment.endDate).toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}
-            </p>
+              <p>
+                {new Date(appointment.startDate).toLocaleDateString('es-ES', { timeZone: 'Europe/Madrid' })}{' '} | {' '}
+                {new Date(appointment.startDate).toLocaleTimeString('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' })}{' '}
+                -{' '}
+                {new Date(appointment.endDate).toLocaleTimeString('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' })}
+              </p>
               <p className="text-gray-600">Description: {appointment.description}</p>
               <p className="text-gray-600">Student: {appointment.student.name}</p>
             </div>
